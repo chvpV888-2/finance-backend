@@ -19,16 +19,19 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // ALLOW SWAGGER DOCUMENTATION FOR EVERYONE
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
                         // Viewers can only READ data
                         .requestMatchers(HttpMethod.GET, "/api/records/**").hasAnyRole("VIEWER", "ANALYST", "ADMIN")
 
                         // Analysts can see the dashboard math
                         .requestMatchers("/api/dashboard/**").hasAnyRole("ANALYST", "ADMIN")
 
-                        // ONLY Admins can create or delete records
+                        // ONLY Admins can create, update, or delete records
                         .requestMatchers(HttpMethod.POST, "/api/records/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/records/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/records/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/records/**").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )
