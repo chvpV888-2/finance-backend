@@ -67,3 +67,9 @@ In-Memory Database: Chosen over PostgreSQL to allow reviewers to run the applica
 Authentication: Implemented HTTP Basic Auth rather than JWTs to keep the evaluation focused on the core RBAC logic and routing structure rather than token lifecycle management.
 
 Soft Deletes: Omitted for simplicity in V1, utilizing hard deletes for standard CRUD demonstration.
+
+## 📚 API Documentation (Swagger UI)
+This project includes auto-generated, interactive API documentation. You do not need Postman to test the endpoints. 
+
+Once the application is running, you can view and test all APIs directly in your browser by visiting:
+* **Swagger UI:** [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
